@@ -29,7 +29,9 @@ export function getCheckpoint(eventID, checkpointID) {
   }))
 }
 //addSplit(eventID, checkpointID, runnerID, time)
-
+export function addSplit(eventID, checkpointID, runnerID, time) {
+  
+}
 //updateSplit(eventID, checkpointID, runnerID, time, timestamp)
 
 //addEvent(eventName, numParticipants, numCheckpoints, password)
