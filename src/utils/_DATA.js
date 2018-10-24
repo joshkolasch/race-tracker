@@ -38,27 +38,38 @@ let runID = 300;
 //if the user adjusts the event.startTime, the splits with 'auto' will all be updated
 /*
   store = {
-    event: {stuff},
+    event: {
+      eventID:
+      name:
+      numRunners:
+      numCheckpoints:
+      startTime:
+    },
+
     user: {
       isAuthenticated: true,
     },
-    checkpoint: 3,
-    runners: {
-      1: {
-        runnerID: 1234,
-        runnerNumber: 1,
-        split: '10:20',
-        timestamp: '1540084649946',
-        updateMethod: 'auto'
-      },
-      23: {
-        runnerID: 1235, 
-        runnerNumber: 23,
-        split: '5:15',
-        timestamp: '1540084688057',
-        updateMethod: 'manual'
+
+    checkpoint{
+      checkpointID: 3,
+      runners: {
+        1: {
+          runnerID: 1234,
+          runnerNumber: 1,
+          split: '10:20',
+          timestamp: '1540084649946',
+          updateMethod: 'auto'
+        },
+        23: {
+          runnerID: 1235, 
+          runnerNumber: 23,
+          split: '5:15',
+          timestamp: '1540084688057',
+          updateMethod: 'manual'
+        }
       }
-    }
+    },
+
   }
 */
 

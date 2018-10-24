@@ -3,8 +3,15 @@ import '../styles/App.css';
 import { getEvent, getCheckpoint } from '../utils/api';
 import { getUTCTime, callConvertTimeToSplit, isValidSplit, formatSplit } from '../utils/helpers';
 import { callGetEvent, callCreateEvent, callGetCheckpoint, callAddSplit, callRestartEvent, callStartEvent, callUpdateSplit, callUpdateEvent, callEditEvent } from '../secrets/tests'
+import { handleGetEvent } from '../actions/shared'
+import { connect } from 'react-redux'
 
 class App extends Component {
+  componentDidMount () {
+    const eventID = 2305;
+    this.props.dispatch(handleGetEvent(eventID))
+  }
+
   render() {
     return (
       <div className="App">
@@ -14,13 +21,10 @@ class App extends Component {
         <div>
           App starts here!
         </div>
-        <div>
-          {console.log('call from app', callEditEvent())}
-        </div>
       </div>
       
     );
   }
 }
 
-export default App;
+export default connect()(App);

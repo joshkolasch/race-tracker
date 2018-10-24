@@ -44,7 +44,7 @@ export function addSplit(eventID, checkpointID, runnerID, time) {
 
 function formatEvent (event) {
   return {
-    id: event.id,
+    eventID: event.eventID,
     name: event.name,
     numRunners: event.numRunners,
     numCheckpoints: event.numCheckpoints,
