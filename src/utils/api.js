@@ -23,10 +23,11 @@ export function getEvent(eventID) {
 export function getCheckpoint(eventID, checkpointID) {
   return Promise.all([
     _getCheckpoint(eventID, checkpointID)
-  ]).then(([checkpoint]) => ({
-    checkpoint: formatCheckpoint(checkpoint),
-    runners: formatRunners(checkpoint),
-  }))
+  ]).then(([checkpoint]) => {
+    return {
+      checkpointID: formatCheckpoint(checkpoint),
+      runners: formatRunners(checkpoint),
+  }})
 }
 //addSplit(eventID, checkpointID, runnerID, time)
 export function addSplit(eventID, checkpointID, runnerID, time) {
@@ -55,7 +56,7 @@ function formatEvent (event) {
 
 //TODO:
 function formatCheckpoint (checkpoint) {
-  return checkpoint.id;
+  return checkpoint.checkpointID;
 }
 
 function formatRunners (checkpoint) {

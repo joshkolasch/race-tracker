@@ -11,7 +11,7 @@ let testEvent = {
 }
 
 /* */
-let testCheckpoint = {
+/*let testCheckpoint = {
   checkpointID: 1,
   runners: {
     1: {
@@ -29,6 +29,98 @@ let testCheckpoint = {
       updateMethod: 'manual'
     }
   }
+}*/
+
+//this is not what the database will look like, it will only contain events and splits
+//but when asked to return a checkpoint it will format it like this. 
+//NOTE: getCheckpoint() will only receive 1 checkpoint, not the entire set of checkpoints
+let testCheckpoint = {
+  1: {
+    checkpointID: 1,
+    runners: {
+      1: {
+        runnerID: 1201,
+        runnerNumber: 1,
+        split: '10:20',
+        timestamp: 1540084649946,
+        updateMethod: 'auto'
+      },
+      23: {
+        runnerID: 1223,
+        runerNumber: 23,
+        split: '5:15',
+        timestamp: 1540084688057,
+        updateMethod: 'manual'
+      }
+    }
+  },
+  2: {
+    checkpointID: 2,
+    runners: {
+      3: {
+        runnerID: 1203,
+        runnerNumber: 3,
+        split: '20:20',
+        timestamp: 1540084649946,
+        updateMethod: 'auto'
+      },
+      25: {
+        runnerID: 1225,
+        runerNumber: 25,
+        split: '15:15',
+        timestamp: 1540084688057,
+        updateMethod: 'manual'
+      }
+    },
+  },
+  3: {
+    checkpointID: 3,
+    runners: {
+
+    }
+  },
+  4: {
+    checkpointID: 4,
+    runners: {
+
+    }
+  },
+  5: {
+    checkpointID: 5,
+    runners: {
+
+    }
+  },
+  6: {
+    checkpointID: 6,
+    runners: {
+
+    }
+  },
+  7: {
+    checkpointID: 7,
+    runners: {
+
+    }
+  },
+  8: {
+    checkpointID: 8,
+    runners: {
+
+    }
+  },
+  9: {
+    checkpointID: 9,
+    runners: {
+
+    }
+  },
+  10: {
+    checkpointID: 10,
+    runners: {
+
+    }
+  },
 }
 
 let runID = 300;
@@ -139,10 +231,16 @@ export function _editEvent(event) {
   })
 }
 
+
 //test: DONE
 export function _getCheckpoint (eventID, checkpointID) {
   return new Promise((res, rej) => {
-    setTimeout(() => res({...testCheckpoint}), 1000)
+    setTimeout(() => {
+      const newCheckpoint = {
+        ...testCheckpoint[checkpointID]
+      }
+      res(newCheckpoint)
+    }, 1000)
   })
 }
 
@@ -154,12 +252,16 @@ export function _addSplit(eventID, checkpointID, runner) {
     setTimeout(() => {
       testCheckpoint = {
         ...testCheckpoint,
-        runners: {
-          ...testCheckpoint.runners,
-          [formattedRunner.runnerNumber]: formattedRunner
+        [checkpointID]: {
+          ...testCheckpoint[checkpointID],
+          runners: {
+            ...testCheckpoint[checkpointID].runners,
+            [formattedRunner.runnerNumber]: formattedRunner
+          }
         }
         
       }
+      //console.log('testCheckpoint after add', testCheckpoint)
       res(formattedRunner);
     }, 1000)
   })
@@ -168,19 +270,25 @@ export function _addSplit(eventID, checkpointID, runner) {
 //test: DONE
 export function _updateSplit(eventID, checkpointID, runner) {
   return new Promise((res, rej) => {
-    console.log('before update split', testCheckpoint)
+    //console.log('before update split', testCheckpoint)
     setTimeout(() => {
       testCheckpoint = {
         ...testCheckpoint,
-        runners: {
-          ...testCheckpoint.runners,
-          [runner.runnerNumber]: {
-            ...runner
+        [checkpointID]: {
+          ...testCheckpoint[checkpointID],
+          runners: {
+            ...testCheckpoint[checkpointID].runners,
+            [runner.runnerNumber]: {
+              ...testCheckpoint[checkpointID].runners[runner.runnerNumber],
+              split: runner.split,
+              timestamp: getUTCTime()
+            }
           }
         }
       }
-      console.log('after update split', testCheckpoint);
-      res();
+      //console.log('after update split', testCheckpoint);
+      const newRunner = testCheckpoint[checkpointID].runners[runner.runnerNumber]
+      res(newRunner);
     }, 1000)
   })
 }
