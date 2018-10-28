@@ -13,7 +13,7 @@ class Home extends Component {
 
 
   render() {
-    console.log('yo', this.props)
+    //console.log('yo', this.props)
     return (
       <div>
         <div> 

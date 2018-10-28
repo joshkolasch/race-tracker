@@ -23,8 +23,6 @@ function selectCheckpoint(checkpoint) {
 export function handleSelectCheckpoint (checkpointID) {
   return (dispatch, getState) => {
     const { event } = getState()
-
-    console.log('here maybe?', event.eventID, checkpointID)
     //TODO:
     //dispatch(showLoading())
     return getCheckpoint(event.eventID, checkpointID)

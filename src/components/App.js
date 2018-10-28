@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 // For debugging api's
-
+/*
 import { getEvent, getCheckpoint } from '../utils/api';
 import { getUTCTime, callConvertTimeToSplit, isValidSplit, formatSplit } from '../utils/helpers';
 import { callGetEvent, callCreateEvent, callGetCheckpoint, callAddSplit, callRestartEvent, callStartEvent, callUpdateSplit, callUpdateEvent, callEditEvent } from '../secrets/tests'
-
+*/
 import { handleGetEvent } from '../actions/shared'
+import { handleSelectCheckpoint } from '../actions/checkpoint'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Checkpoint from './Checkpoint'
+import SplitTable from './SplitTable'
+import CustomTable from './CustomTable'
 
 class App extends Component {
   componentDidMount () {
     const eventID = 2305;
+    const checkpoint = 1;
     this.props.dispatch(handleGetEvent(eventID))
+    this.props.dispatch(handleSelectCheckpoint(checkpoint))
   }
 
   render() {
@@ -32,7 +37,8 @@ class App extends Component {
           }
         </div> */}
         <div>
-          <Checkpoint />
+          {/*<Checkpoint />*/}
+          <CustomTable />
         </div>
       </div>
       

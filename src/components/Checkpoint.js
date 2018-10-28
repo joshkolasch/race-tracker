@@ -10,14 +10,15 @@ class Checkpoint extends Component {
 
   handleInputChange = (e) => {
     const { value, name } = e.target
+    console.log('before', this.state.checkpointInput)
     this.setState(() => ({
       [name]: value
     }))
+    console.log('after', this.state.checkpointInput)
   }
 
   isValidCheckpoint = () => {
     const { checkpointInput } = this.state
-    console.log('valid?', checkpointInput)
 
     if(checkpointInput >= 1 && checkpointInput <= this.props.numCheckpoints){
       return true
@@ -29,8 +30,8 @@ class Checkpoint extends Component {
     e.preventDefault()
 
     const checkpointID = this.state.checkpointInput;
-    console.log('checkpointID', checkpointID);
-    //Redirect to Splits Table
+
+    //TODO:Redirect to Splits Table
     this.props.dispatch(handleSelectCheckpoint(checkpointID))
   }
 
@@ -39,13 +40,12 @@ class Checkpoint extends Component {
 
     return (
       <div>
-        {console.log('props yo', this.props)}
         <div className='page-header'>
           Select Checkpoint
         </div>
         <form className='checkpoint-form' onSubmit={this.handleSubmit}>
           <input 
-            value={this.checkpointInput}
+            value={checkpointInput}
             onChange={this.handleInputChange}
             name='checkpointInput'
             type='text' 
