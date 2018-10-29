@@ -5,7 +5,7 @@
 let testEvent = {
   eventID: 2305,
   name: 'Sunny Hills Relay',
-  numRunners: 25,
+  numRunners: 15,
   numCheckpoints: 10,
   startTime: '10:00:000'
 }
@@ -45,7 +45,7 @@ let testCheckpoint = {
         timestamp: 1540084649946,
         updateMethod: 'auto'
       },
-      23: {
+      13: {
         runnerID: 1223,
         runerNumber: 23,
         split: '5:15',
