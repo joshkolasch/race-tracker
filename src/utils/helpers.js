@@ -6,7 +6,6 @@ const SECOND = 1000;
 export function convertTimeToSplit(startTime, splitTime){
   
   let diff = splitTime - startTime;
-
   //catch NaN
   if(diff !== diff) {
     return null;
@@ -23,6 +22,7 @@ export function convertTimeToSplit(startTime, splitTime){
   diff %= SECOND;
   const milliseconds = diff;
 
+  
   return convertSplitToString(hours, minutes, seconds, milliseconds);
   
 }

@@ -1,11 +1,12 @@
 //TODO - import more functions from _DATA
-import { _getEvent, _getCheckpoint } from './_DATA.js';
+import { _getEvent, _getCheckpoint, _addSplit } from './_DATA.js';
 
 /*TODO:
 import { someFunction } from './helpers'
 Reference Video: TM-> React-redux-> 'Real World Redux' -> 'Starter Code'
 
 */
+
 
 //getEvent(eventID)
 export function getEvent(eventID) {
@@ -30,8 +31,19 @@ export function getCheckpoint(eventID, checkpointID) {
   }})
 }
 //addSplit(eventID, checkpointID, runnerID, time)
-export function addSplit(eventID, checkpointID, runnerID, time) {
-  
+export function addSplit(eventID, checkpointID, runner) {
+  return Promise.all([
+    _addSplit(eventID, checkpointID, runner)
+  ]).then(([checkpoint]) => {
+    const data = {...checkpoint}
+    /*console.log('checkpoint in addSplit [api.js]', data)
+    console.log(formatCheckpoint(data))
+    console.log(formatRunners(data))*/
+    return {
+      checkpointID: formatCheckpoint(data),
+      runners: formatRunners(data)
+    }
+  }).catch((e) => console.log('error',e))
 }
 //updateSplit(eventID, checkpointID, runnerID, time, timestamp)
 

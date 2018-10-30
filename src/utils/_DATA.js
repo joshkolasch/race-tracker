@@ -7,7 +7,7 @@ let testEvent = {
   name: 'Sunny Hills Relay',
   numRunners: 15,
   numCheckpoints: 10,
-  startTime: '10:00:000'
+  startTime: 1540866951466 
 }
 
 /* */
@@ -262,7 +262,8 @@ export function _addSplit(eventID, checkpointID, runner) {
         
       }
       //console.log('testCheckpoint after add', testCheckpoint)
-      res(formattedRunner);
+      //res(formattedRunner);
+      res(testCheckpoint[checkpointID])
     }, 1000)
   })
 }

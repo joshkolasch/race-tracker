@@ -11,8 +11,7 @@ import { handleSelectCheckpoint } from '../actions/checkpoint'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Checkpoint from './Checkpoint'
-import SplitTable from './SplitTable'
-import CustomTable from './CustomTable'
+import ConnectedTable from './ConnectedTable'
 
 class App extends Component {
   componentDidMount () {
@@ -38,7 +37,7 @@ class App extends Component {
         </div> */}
         <div>
           {/*<Checkpoint />*/}
-          <CustomTable />
+          {this.props.checkpoint.runners ? <ConnectedTable /> : <div>Loading</div>}
         </div>
       </div>
       
@@ -48,9 +47,11 @@ class App extends Component {
 
 //TODO: later this will need to relocated [probably into the Start.js component]
 //grab authedUser from store
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, event, checkpoint }) {
   return {
-    loading: authedUser === null
+    loading: authedUser === null,
+    event,
+    checkpoint
   }
 }
 
