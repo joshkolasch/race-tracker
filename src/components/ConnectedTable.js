@@ -81,7 +81,7 @@ class ConnectedTable extends Component {
     //return () => (alert(`${item.runnerNumber} ${rowIndex}`))
 
     return () => { 
-      this.props.dispatch(handleAddSplit(item, checkpointID))
+      this.props.dispatch(handleAddSplit(item))
       //console.log('inside add callback', this.props)
       this.setState( state => ({
         ...state,
@@ -95,6 +95,7 @@ class ConnectedTable extends Component {
     const { runners, numRunners, checkpointID } = this.props
     const { runnerData } = this.state
 
+    //TODO: don't use { runnerData } = this.state
     //let runnerData = this.mapRunnersToData(runners, numRunners)
     //console.log('splitData', this.state.splitData)
     return (

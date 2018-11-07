@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import Home from './Home'
 import Checkpoint from './Checkpoint'
 import ConnectedTable from './ConnectedTable'
+import Runners from './Runners'
 
 class App extends Component {
   componentDidMount () {
@@ -37,7 +38,8 @@ class App extends Component {
         </div> */}
         <div>
           {/*<Checkpoint />*/}
-          {this.props.checkpoint.runners ? <ConnectedTable /> : <div>Loading</div>}
+          {/*this.props.checkpoint.runners ? <ConnectedTable /> : <div>Loading</div>*/}
+          {this.props.checkpoint.runners ? <Runners /> : <div>Loading</div>}
         </div>
       </div>
       

@@ -7,7 +7,7 @@ let testEvent = {
   name: 'Sunny Hills Relay',
   numRunners: 15,
   numCheckpoints: 10,
-  startTime: 1540866951466 
+  startTime: 1541581769928 
 }
 
 /* */
@@ -288,8 +288,8 @@ export function _updateSplit(eventID, checkpointID, runner) {
         }
       }
       //console.log('after update split', testCheckpoint);
-      const newRunner = testCheckpoint[checkpointID].runners[runner.runnerNumber]
-      res(newRunner);
+      //const newRunner = testCheckpoint[checkpointID].runners[runner.runnerNumber]
+      res(testCheckpoint[checkpointID]);
     }, 1000)
   })
 }

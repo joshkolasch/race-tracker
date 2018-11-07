@@ -1,5 +1,5 @@
 //TODO - import more functions from _DATA
-import { _getEvent, _getCheckpoint, _addSplit } from './_DATA.js';
+import { _getEvent, _getCheckpoint, _addSplit, _updateSplit } from './_DATA.js';
 
 /*TODO:
 import { someFunction } from './helpers'
@@ -43,9 +43,21 @@ export function addSplit(eventID, checkpointID, runner) {
       checkpointID: formatCheckpoint(data),
       runners: formatRunners(data)
     }
-  }).catch((e) => console.log('error',e))
+  }).catch((e) => console.log('error in api/addSplit()', e))
 }
 //updateSplit(eventID, checkpointID, runnerID, time, timestamp)
+export function updateSplit(eventID, checkpointID, runner) {
+  return Promise.all([
+    _updateSplit(eventID, checkpointID, runner)
+  ]).then(([checkpoint]) => {
+    const data = {...checkpoint}
+    return {
+      checkpointID: formatCheckpoint(data),
+      runners: formatRunners(data)
+    }
+  }).catch((e) => console.log('error in api/updateSplit()', e))
+  
+}
 
 //addEvent(eventName, numParticipants, numCheckpoints, password)
 

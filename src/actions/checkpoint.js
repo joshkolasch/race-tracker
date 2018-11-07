@@ -1,4 +1,4 @@
-import { getCheckpoint, addSplit } from '../utils/api'
+import { getCheckpoint, addSplit, updateSplit } from '../utils/api'
 import { convertTimeToSplit } from '../utils/helpers'
 
 export const RECEIVE_CHECKPOINT = 'RECEIVE_CHECKPOINT'
@@ -40,11 +40,13 @@ export function handleSelectCheckpoint (checkpointID) {
   }
 }
 
-export function handleAddSplit (runner, checkpointID) {
+//TODO: add updateMethod as an input parameter
+export function handleAddSplit (runner) {
   return (dispatch, getState) => {
-    const { event } = getState()
+    const { event, checkpoint } = getState()
     let time = new Date().getTime()
-
+    const checkpointID = checkpoint.checkpointID
+    
     const newRunner = {
       ...runner,
       split: convertTimeToSplit(event.startTime, time)
@@ -56,3 +58,20 @@ export function handleAddSplit (runner, checkpointID) {
   }
 }
 
+export function handleEditSplit(runner) {
+  return (dispatch, getState) => {
+    const { event, checkpoint } = getState()
+    const checkpointID = checkpoint.checkpointID
+    const currentRunner = checkpoint.runners[runner.runnerNumber]
+
+    const newRunner = {
+      ...currentRunner,
+      split: runner.split
+    }
+    //console.log('runner in checkpoint/handleEditSplit()', newRunner)
+    return updateSplit(event.eventID, checkpointID, newRunner)
+      .then((checkpoint) => {
+        dispatch(getSplit(checkpoint))
+      })
+  }
+}
